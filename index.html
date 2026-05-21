@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TreasuryX — The Global Treasury Expert Network</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -945,18 +943,57 @@
     const orig = btn.textContent;
     btn.textContent = 'Submitting...';
     btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = 'Thank you — we will be in touch.';
-      btn.style.background = '#1B6E50';
-      btn.style.color = '#F4EFE6';
-      setTimeout(() => {
-        e.target.reset();
-        btn.textContent = orig;
-        btn.style.background = '';
-        btn.style.color = '';
-        btn.disabled = false;
-      }, 3000);
-    }, 800);
+
+    const payload = type === 'practitioner'
+      ? {
+          form_type: 'practitioner',
+          full_name: document.getElementById('pr-name').value,
+          work_email: document.getElementById('pr-email').value,
+          current_title: document.getElementById('pr-title').value,
+          company: document.getElementById('pr-company').value,
+          looking_for: document.getElementById('pr-goal').value,
+          submitted_at: new Date().toISOString()
+        }
+      : {
+          form_type: 'provider',
+          full_name: document.getElementById('pv-name').value,
+          work_email: document.getElementById('pv-email').value,
+          company: document.getElementById('pv-company').value,
+          product_category: document.getElementById('pv-category').value,
+          goal: document.getElementById('pv-goal').value,
+          submitted_at: new Date().toISOString()
+        };
+
+    const WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/23821390/4o8iuu0/';
+
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      body: new URLSearchParams(payload)
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error();
+        btn.textContent = 'Thank you — we will be in touch.';
+        btn.style.background = '#1B6E50';
+        btn.style.color = '#F4EFE6';
+        setTimeout(() => {
+          e.target.reset();
+          btn.textContent = orig;
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.disabled = false;
+        }, 3000);
+      })
+      .catch(() => {
+        btn.textContent = 'Something went wrong — try again?';
+        btn.style.background = '#8B2E2E';
+        btn.style.color = '#F4EFE6';
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.disabled = false;
+        }, 3000);
+      });
   }
 </script>
 
