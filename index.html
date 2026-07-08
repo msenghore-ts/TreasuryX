@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TreasuryX — The Global Treasury Expert Network</title>
+<title>TreasuryX: The Global Treasury Expert Network</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -270,15 +270,6 @@
     margin-bottom: 56px;
     padding-bottom: 24px;
     border-bottom: 1px solid var(--border-light);
-  }
-
-  .section-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    text-transform: uppercase;
-    white-space: nowrap;
   }
 
   .section-title {
@@ -553,11 +544,17 @@
 
   .colophon-main {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: 48px;
     padding-bottom: 48px;
     border-bottom: 1px solid rgba(244,239,230,0.1);
     margin-bottom: 28px;
+  }
+
+  .colophon-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
   }
 
   .colophon-brand {
@@ -627,7 +624,8 @@
     .paths-grid,
     .steps-grid,
     .forms-grid,
-    .colophon-main { grid-template-columns: 1fr; }
+    .colophon-main,
+    .colophon-links { grid-template-columns: 1fr; }
 
     .hero-stat {
       border-left: none;
@@ -706,7 +704,6 @@
 <section id="practitioners">
   <div class="section-inner">
     <div class="section-header">
-      <div class="section-num">§ 01</div>
       <h2 class="section-title">For <em>Practitioners</em></h2>
     </div>
     <div class="paths-grid">
@@ -742,14 +739,13 @@
 <section id="providers">
   <div class="section-inner">
     <div class="section-header">
-      <div class="section-num">§ 02</div>
       <h2 class="section-title">For <em>Providers</em></h2>
     </div>
     <div class="paths-grid">
       <div class="path-card reveal">
         <div class="path-badge">Access</div>
         <h3>Get in the room with the people <em>you're building for.</em></h3>
-        <p>If you are building for treasury teams — a TMS, a cash investing platform, an FX tool, a working capital product — and you have struggled to get in front of real practitioners, we can help. Carefully.</p>
+        <p>If you are building for treasury teams (a TMS, a cash investing platform, an FX tool, a working capital product) and you have struggled to get in front of real practitioners, we can help. Carefully.</p>
         <ul class="path-features">
           <li>Structured feedback sessions with active, verified practitioners across 28 countries</li>
           <li>Insight into the real workflows your product needs to fit</li>
@@ -760,7 +756,7 @@
       <div class="path-card dark reveal">
         <div class="path-badge">Credibility</div>
         <h3>Build credibility before <em>you enter the market.</em></h3>
-        <p>The treasury market is tight-knit. Reputation travels fast. Getting your product in front of the right people — on their terms, through a trusted intermediary — is worth more than any marketing campaign.</p>
+        <p>The treasury market is tight-knit. Reputation travels fast. Getting your product in front of the right people, on their terms, through a trusted intermediary, is worth more than any marketing campaign.</p>
         <ul class="path-features">
           <li>Access to 450+ treasury decision-makers across 28 countries</li>
           <li>Warm follow-ups, opt-in only: if a practitioner is interested, we make the introduction</li>
@@ -777,7 +773,6 @@
 <section id="how">
   <div class="section-inner">
     <div class="section-header">
-      <div class="section-num">§ 03</div>
       <h2 class="section-title">How it <em>works</em></h2>
     </div>
     <div class="steps-grid">
@@ -803,7 +798,6 @@
 <section class="forms-section" id="apply">
   <div class="section-inner">
     <div class="section-header">
-      <div class="section-num">§ 04</div>
       <h2 class="section-title">Apply to <em>join</em></h2>
     </div>
     <div class="forms-grid">
@@ -897,35 +891,29 @@
     <div class="colophon-main">
       <div>
         <div class="colophon-brand">Treasury<em>X</em></div>
-        <p class="colophon-tag">The global network of treasury practitioners — built by the people who sit in the chair.</p>
+        <p class="colophon-tag">The global network of treasury practitioners, built by the people who sit in the chair.</p>
       </div>
-      <div>
-        <div class="col-title">The network</div>
-        <ul class="col-list">
-          <li><a href="#practitioners">For Practitioners</a></li>
-          <li><a href="#providers">For Providers</a></li>
-          <li><a href="#how">How It Works</a></li>
-          <li><a href="#apply">Apply</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="col-title">Elsewhere</div>
-        <ul class="col-list">
-          <li><a href="https://treasuryspring.com">TreasurySpring</a></li>
-          <li><a href="#">LinkedIn</a></li>
-          <li><a href="#">Press</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="col-title">Correspond</div>
-        <ul class="col-list">
-          <li><a href="mailto:hello@treasuryexperts.org">hello@treasuryexperts.org</a></li>
-          <li><a href="mailto:partners@treasuryexperts.org">partners@treasuryexperts.org</a></li>
-        </ul>
+      <div class="colophon-links">
+        <div>
+          <div class="col-title">The network</div>
+          <ul class="col-list">
+            <li><a href="#practitioners">For Practitioners</a></li>
+            <li><a href="#providers">For Providers</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#apply">Apply</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="col-title">Correspond</div>
+          <ul class="col-list">
+            <li><a href="mailto:hello@treasuryexperts.org">hello@treasuryexperts.org</a></li>
+            <li><a href="mailto:onboarding@treasuryexperts.org">onboarding@treasuryexperts.org</a></li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="colophon-base">
-      <div>2026 TreasuryX. A programme of TreasurySpring.</div>
+      <div>2026 TreasuryX.</div>
       <div><a href="#">Privacy</a> · <a href="#">Terms</a></div>
     </div>
   </div>
@@ -972,7 +960,7 @@
     })
       .then((res) => {
         if (!res.ok) throw new Error();
-        btn.textContent = 'Thank you — we will be in touch.';
+        btn.textContent = 'Thank you. We will be in touch.';
         btn.style.background = '#1B6E50';
         btn.style.color = '#F4EFE6';
         setTimeout(() => {
@@ -984,7 +972,7 @@
         }, 3000);
       })
       .catch(() => {
-        btn.textContent = 'Something went wrong — try again?';
+        btn.textContent = 'Something went wrong. Try again?';
         btn.style.background = '#8B2E2E';
         btn.style.color = '#F4EFE6';
         setTimeout(() => {
