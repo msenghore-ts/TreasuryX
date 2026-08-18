@@ -164,8 +164,8 @@
 
   .hero-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 60px;
+    grid-template-columns: 2.1fr 1fr;
+    gap: 72px;
     padding-top: 48px;
     border-top: 1px solid var(--border);
     align-items: start;
@@ -173,16 +173,16 @@
 
   .hero-lede {
     font-family: var(--display);
-    font-size: 21px;
-    line-height: 1.45;
+    font-size: clamp(21px, 1.95vw, 27px);
+    line-height: 1.42;
     font-weight: 300;
-    letter-spacing: -0.01em;
-    max-width: 38ch;
+    letter-spacing: -0.012em;
+    max-width: none;
     font-variation-settings: "opsz" 72;
   }
 
   .hero-lede::first-letter {
-    font-size: 58px;
+    font-size: 72px;
     float: left;
     line-height: 0.88;
     padding: 6px 10px 0 0;
@@ -192,10 +192,10 @@
 
   .earn-line {
     display: block;
-    margin-top: 1.25em;
+    margin-top: 1.4em;
     font-style: italic;
     color: var(--accent);
-    font-size: 18px;
+    font-size: clamp(18px, 1.5vw, 21px);
     font-weight: 400;
     clear: both;
   }
@@ -208,10 +208,15 @@
     clear: both;
   }
 
-  .hero-stat {
+  .hero-stats {
     border-left: 1px solid var(--border);
-    padding-left: 24px;
+    padding-left: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
   }
+
+  .hero-stat { padding: 0; }
 
   .hero-stat-num {
     font-family: var(--display);
@@ -388,9 +393,59 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .step { padding: 0 48px 0 0; border-right: 1px solid var(--border-light); }
+  .steps-track {
+    position: relative;
+    height: 1px;
+    background: var(--border-light);
+    margin-bottom: 44px;
+  }
+
+  .steps-track i {
+    position: absolute;
+    left: 0; top: 0;
+    height: 1px;
+    width: 0;
+    background: var(--accent);
+    display: block;
+  }
+
+  .steps-node {
+    position: absolute;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    margin: -4.5px 0 0 -4.5px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1px solid var(--border-light);
+    transition: background 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+  }
+
+  .steps-node.on {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.25);
+  }
+
+  .step {
+    padding: 0 48px 0 0;
+    border-right: 1px solid var(--border-light);
+    opacity: 0.32;
+    transform: translateY(10px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+
+  .step.on { opacity: 1; transform: none; }
   .step:nth-child(2) { padding: 0 48px; }
   .step:last-child { border-right: none; padding: 0 0 0 48px; }
+
+  .step-num { transition: color 0.4s ease; }
+  .step:not(.on) .step-num { color: var(--muted); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .step { opacity: 1; transform: none; transition: none; }
+    .steps-node { transition: none; }
+  }
 
   .step-num {
     font-family: var(--mono);
@@ -608,6 +663,28 @@
   .colophon-base a { color: rgba(244,239,230,0.28); transition: color 0.2s; }
   .colophon-base a:hover { color: var(--paper); }
 
+  /* GUILLOCHE WATERMARKS */
+  section, .hero { position: relative; }
+  .hero { overflow: hidden; }
+  .hero-inner, .section-inner { position: relative; z-index: 1; }
+
+  .wm { position: absolute; pointer-events: none; z-index: 0; }
+  .wm svg { display: block; width: 100%; height: 100%; will-change: transform; }
+  .wm path { fill: none; stroke: var(--accent); stroke-width: 0.5; opacity: 0.45; }
+
+  .wm-hero { top: -13%; right: -4%; width: min(330px, 26vw); aspect-ratio: 1; }
+
+  @keyframes wm-spin { to { transform: rotate(360deg); } }
+  .wm svg { animation: wm-spin 320s linear infinite; }
+
+  @media (max-width: 620px) {
+    .wm-hero { width: 62vw; top: auto; bottom: -6%; right: -18%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wm svg { animation: none; }
+  }
+
   /* REVEAL */
   .reveal {
     opacity: 0;
@@ -629,8 +706,9 @@
     .colophon-main,
     .colophon-links { grid-template-columns: 1fr; }
 
+    .hero-stats { border-left: none; padding-left: 0; gap: 24px; }
+
     .hero-stat {
-      border-left: none;
       border-top: 1px solid var(--border);
       padding: 24px 0 0;
     }
@@ -641,6 +719,8 @@
       padding: 28px 0 0;
     }
 
+    .steps-track { display: none; }
+    .step { opacity: 1; transform: none; }
     .step:first-child { border-top: none; padding-top: 0; }
     .step:nth-child(2),
     .step:last-child { padding: 28px 0 0; }
@@ -657,6 +737,7 @@
     .form-panel { padding: 32px 24px; }
   }
 </style>
+<script id="vtag-ai-js" async src="https://r2.leadsy.ai/tag.js" data-pid="DwvwopOnz8cC4XN8" data-version="062024"></script>
 </head>
 <body>
 
@@ -678,26 +759,28 @@
 <div class="double-rule"></div>
 
 <section class="hero">
+  <div class="wm wm-hero" aria-hidden="true"><svg viewBox="0 0 600 600" data-rosette="hero"></svg></div>
   <div class="hero-inner">
     <div class="hero-eyebrow">The Global Treasury Expert Network</div>
     <h1 class="hero-headline">Your expertise has a <em>market.</em></h1>
     <div class="hero-grid">
       <div>
-        <p class="hero-lede">Treasury is a quiet craft. The treasurers, CFOs, and heads of finance who understand it best have always learned from each other, in rooms with the doors closed. TreasuryX opens that room, compensates practitioners for the knowledge they bring into it, and connects them directly with the providers shaping the future of treasury technology.
-          <span class="earn-line">Your expertise has real value. We pay for it.</span>
-        </p>
+        <p class="hero-lede">Treasury is a quiet craft. The treasurers, CFOs, and heads of finance who understand it best have always learned from each other, in rooms with the doors closed. TreasuryX opens that room, compensates practitioners for the knowledge they bring into it, and connects them directly with the providers shaping the future of treasury technology.</p>
+        <p class="earn-line">Your expertise has real value. We pay for it.</p>
         <div class="hero-cta">
           <a href="#apply" class="btn btn-primary">Apply as a Practitioner &rarr;</a>
           <a href="#providers" class="btn btn-secondary">For Providers</a>
         </div>
       </div>
-      <div class="hero-stat reveal">
-        <div class="hero-stat-num">450<sup>+</sup></div>
-        <div class="hero-stat-label">Finance professionals in the network, including treasurers, CFOs, and heads of finance</div>
-      </div>
-      <div class="hero-stat reveal">
-        <div class="hero-stat-num">28</div>
-        <div class="hero-stat-label">Countries represented across the global network</div>
+      <div class="hero-stats">
+        <div class="hero-stat reveal">
+          <div class="hero-stat-num">450<sup>+</sup></div>
+          <div class="hero-stat-label">Finance professionals in the network, including treasurers, CFOs, and heads of finance</div>
+        </div>
+        <div class="hero-stat reveal">
+          <div class="hero-stat-num">28</div>
+          <div class="hero-stat-label">Countries represented across the global network</div>
+        </div>
       </div>
     </div>
   </div>
@@ -777,18 +860,24 @@
     <div class="section-header">
       <h2 class="section-title">How it <em>works</em></h2>
     </div>
+    <div class="steps-track" aria-hidden="true">
+      <i id="stepsFill"></i>
+      <span class="steps-node" style="left:0%"></span>
+      <span class="steps-node" style="left:33.333%"></span>
+      <span class="steps-node" style="left:66.667%"></span>
+    </div>
     <div class="steps-grid">
-      <div class="step reveal">
+      <div class="step">
         <div class="step-num">Step 01</div>
         <h3>Apply</h3>
         <p>Tell us about your background and what you are looking to give or gain. We review every application personally and curate each match deliberately. Not everyone is accepted, and that is the point.</p>
       </div>
-      <div class="step reveal">
+      <div class="step">
         <div class="step-num">Step 02</div>
         <h3>Connect, contribute, and earn</h3>
         <p>Practitioners are matched with providers seeking their specific expertise and are compensated for every engagement. They also find mentors and peer groups on their own terms, across a global network of treasury professionals.</p>
       </div>
-      <div class="step reveal">
+      <div class="step">
         <div class="step-num">Step 03</div>
         <h3>Shape what comes next</h3>
         <p>The practitioners who use treasury technology every day should be the ones helping to build it. Your insight shapes better products. Better products raise the whole profession. That is the exchange.</p>
@@ -985,6 +1074,157 @@
         }, 3000);
       });
   }
+</script>
+
+
+<script>
+/* ---------------------------------------------------------------
+   ENGRAVED ARTWORK
+   Guilloche rosettes are drawn with the same maths banknote
+   lathes use: a circle whose radius ripples at a fixed frequency.
+---------------------------------------------------------------- */
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+
+  var SETS = {
+    hero:  [[1.00, 36], [0.93, 36], [0.86, 48], [0.79, 48], [0.70, 60], [0.62, 24], [0.54, 24], [0.44, 18], [0.34, 12]]
+  };
+
+  var GEOM = {
+    hero:  { cx: 300, cy: 300, size: 285, steps: 460, phases: 2 }
+  };
+
+  function ripple(R, amp, k, phase, cx, cy, steps) {
+    var d = '', i, t, r, x, y;
+    for (i = 0; i <= steps; i++) {
+      t = i / steps * Math.PI * 2;
+      r = R + amp * Math.cos(k * t + phase);
+      x = cx + r * Math.cos(t);
+      y = cy + r * Math.sin(t);
+      d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
+    }
+    return d + 'Z';
+  }
+
+  function draw(host, kind) {
+    var bands = SETS[kind], g = GEOM[kind];
+    if (!bands) return;
+    var frag = document.createDocumentFragment();
+    bands.forEach(function (band) {
+      var R = g.size * band[0], amp = R * 0.055, k = band[1];
+      for (var p = 0; p < g.phases; p++) {
+        var node = document.createElementNS(NS, 'path');
+        node.setAttribute('d', ripple(R, amp, k, p * Math.PI / 2, g.cx, g.cy, g.steps));
+        frag.appendChild(node);
+      }
+    });
+    host.appendChild(frag);
+  }
+
+  function init() {
+    var hosts = document.querySelectorAll('[data-rosette]');
+    for (var i = 0; i < hosts.length; i++) draw(hosts[i], hosts[i].getAttribute('data-rosette'));
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+/* ---------------------------------------------------------------
+   HERO STAT COUNT UP
+---------------------------------------------------------------- */
+(function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var done = false;
+
+  function run() {
+    if (done) return;
+    done = true;
+    document.querySelectorAll('.hero-stat-num').forEach(function (node) {
+      var sup = node.querySelector('sup');
+      var target = parseInt(node.textContent.replace(/\D/g, ''), 10);
+      if (!target || reduceMotion) return;
+      var start = null, dur = 900;
+      node.textContent = '0';
+      if (sup) node.appendChild(sup);
+      function step(ts) {
+        if (start === null) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        var e = 1 - Math.pow(1 - p, 3);
+        node.textContent = Math.round(target * e);
+        if (sup) node.appendChild(sup);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  var first = document.querySelector('.hero-stat');
+  if (!first) return;
+  if ('IntersectionObserver' in window) {
+    var ho = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { run(); ho.disconnect(); } });
+    }, { threshold: 0.4 });
+    ho.observe(first);
+  } else {
+    run();
+  }
+})();
+</script>
+
+
+<script>
+/* ---------------------------------------------------------------
+   HOW IT WORKS: scroll-driven timeline
+---------------------------------------------------------------- */
+(function () {
+  var grid = document.querySelector('.steps-grid');
+  var fill = document.getElementById('stepsFill');
+  if (!grid || !fill) return;
+
+  var steps = [].slice.call(grid.querySelectorAll('.step'));
+  var dots  = [].slice.call(document.querySelectorAll('.steps-node'));
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function light() {
+    fill.style.width = '100%';
+    steps.forEach(function (s) { s.classList.add('on'); });
+    dots.forEach(function (d) { d.classList.add('on'); });
+  }
+
+  if (reduce || window.matchMedia('(max-width: 960px)').matches) { light(); return; }
+
+  var ticking = false;
+
+  function update() {
+    ticking = false;
+    var r = grid.getBoundingClientRect();
+    var vh = window.innerHeight;
+    /* Start once the steps are a little way into view, finish
+       before they leave, so the fill tracks the read. */
+    var start = vh * 1.0;
+    var end = vh * 0.25;
+    var p = (start - r.top) / (start - end);
+    p = Math.max(0, Math.min(1, p));
+
+    fill.style.width = (p * 100).toFixed(2) + '%';
+
+    steps.forEach(function (s, i) {
+      s.classList.toggle('on', p >= i / steps.length + 0.02);
+    });
+    dots.forEach(function (d, i) {
+      d.classList.toggle('on', p >= i / steps.length + 0.02);
+    });
+  }
+
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
 </script>
 
 </body>
